@@ -1,0 +1,4 @@
+sliceCurrency
+=============
+
+Simple currency conversion
