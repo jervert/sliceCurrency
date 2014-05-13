@@ -23,7 +23,9 @@
     <p>Another currency conversion tool</p>
   </header>
   <main>
-	  <form id="currency-selection" action="data.php" method="POST"><div class="loading"><img alt="" src="img/ajax-loader.gif"></div></form>
+	  <form id="currency-selection" action="data.php" method="POST" class=" class="pure-form pure-form-stacked">
+      <div class="loading"><img alt="" src="img/ajax-loader.gif"></div>
+    </form>
     <div id="conversion-result"></div>
   </main>
 
@@ -32,19 +34,30 @@
   <div class="loading"><img alt="" src="img/ajax-loader.gif"></div>
 </script>
 <script type="text/template" id="tmpl-currency-selector">
-  <p><label>Quantity: <input type="text" name="quantity" id="c-quantity"></label></p>
-  <p>
-    <label>From {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-1'})}}</label>
-    <label>to {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-2'})}}</label>
-    <input type="submit" value="Convert">
-  </p>
+  <fieldset>
+    <legend>Select values</legend>
+    <p class="pure-u-1">
+      <label for="c-quantity">Quantity:</label>
+      <input type="text" name="quantity" id="c-quantity">
+    </p>
+    <div class="pure-g">
+      <p class="pure-u-1 pure-u-med-1-2">
+        <label for="c-currency-1">From:</label>
+        {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-1'})}}
+      </p>
+      <p class="pure-u-1 pure-u-med-1-2">
+        <label for="c-currency-2">To:</label>
+        {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-2'})}}
+      </p>
+    </div>
+    <p><button type="submit" class="pure-button pure-button-primary">Convert</button></p>
+  </fieldset>
 </script>
 <script type="text/template" id="tmpl-result">
   <p>{{currencies.origin.value}} {{currencies.origin.code}} = {{currencies.destiny.value}} {{currencies.destiny.code}}</p>
   <p>1 {{currencies.origin.code}} = {{rate}} {{currencies.destiny.code}}</p>
 </script>
 <script type="text/template" id="tmpl-currency-list">
-  Currency:
   <select name="{{id}}" id="c-{{id}}">
     [[ _.each(currencies, function (currency, index) { ]]
       <option value="{{currency.code}}">{{currency.name}}</option>
