@@ -1,0 +1,85 @@
+<!doctype html>
+<!--[if lte IE 7]> <html class="no-js ie67 ie678" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8 ie678" lang="en"> <![endif]-->
+<!--[if IE 9]> <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]> <!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+		<meta charset="UTF-8">
+		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+		<title>SliceCurrency</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" href="css/knacss.css" media="all">
+		<link rel="stylesheet" href="css/styles.css" media="all">
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.underscore.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>SliceCurrency</h1>
+    <p>Another currency conversion tool</p>
+  </header>
+  <main>
+	  <form id="currency-selection" action="data.php" method="POST"><div class="loading"><img alt="" src="img/ajax-loader.gif"></div></form>
+    <div id="conversion-result"></div>
+  </main>
+
+
+<script type="text/template" id="tmpl-loading">
+  <div class="loading"><img alt="" src="img/ajax-loader.gif"></div>
+</script>
+<script type="text/template" id="tmpl-currency-selector">
+  <p><label>Quantity: <input type="text" name="quantity" id="c-quantity"></label></p>
+  <p>
+    <label>From {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-1'})}}</label>
+    <label>to {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-2'})}}</label>
+    <input type="submit" value="Convert">
+  </p>
+</script>
+<script type="text/template" id="tmpl-result">
+  <p>{{currencies.origin.value}} {{currencies.origin.code}} = {{currencies.destiny.value}} {{currencies.destiny.code}}</p>
+  <p>1 {{currencies.origin.code}} = {{rate}} {{currencies.destiny.code}}</p>
+</script>
+<script type="text/template" id="tmpl-currency-list">
+  Currency:
+  <select name="{{id}}" id="c-{{id}}">
+    [[ _.each(currencies, function (currency, index) { ]]
+      <option value="{{currency.code}}">{{currency.name}}</option>
+    [[ }); ]]
+  </select>
+</script>
+
+<script type="text/javascript">
+  (function() {
+    _.templateSettings = {
+      interpolate: /\{\{(.+?)\}\}/g,
+      evaluate: /\[\[(.+?)\]\]/g
+    };
+
+    _.mixin({
+      tmpl: function (id, context) {
+        var html = $.trim($(id).html()).replace(/(\r\n|\n|\r)/gm, '');
+        return _.template(html, context);
+      }
+    });
+  
+    // http://en.wikipedia.org/wiki/ISO_4217
+    $.get('data/currencies.json', function (currencies) {
+      $('#currency-selection').html(_.tmpl('#tmpl-currency-selector', {currencies: currencies}));
+    
+      $('form').on('submit', function (ev) {
+        ev.preventDefault();
+        $('#conversion-result').html(_.tmpl('#tmpl-loading', {}));
+        $.post($('form').attr('action'), $('form').serialize(), function (data) {
+          $('#conversion-result').html(_.tmpl('#tmpl-result', data));
+        });
+      });
+    });
+
+  }());
+</script>
+</body>
+</html>
