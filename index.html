@@ -37,22 +37,22 @@
 <script type="text/template" id="tmpl-currency-selector">
     <form action="data.php" method="POST">
       <p class="pure-control-group">
-        <label for="c-quantity">Quantity:</label>
+        <label for="c-quantity">{{$Q.literals.form.quantity}}:</label>
         <input type="number" name="quantity" id="c-quantity" required aria-required="true">
       </p>
       
       <fieldset class="pure-group">
-        <legend>Currencies</legend>
+        <legend>{{$Q.literals.form.currencies}}</legend>
         <p class="pure-control-group">
-          <label for="c-currency-1">From:</label>
+          <label for="c-currency-1">{{Q.literals.form.originCurrency}}:</label>
           {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-1'})}}
         </p>
         <p class="pure-control-group">
-          <label for="c-currency-2">To:</label>
+          <label for="c-currency-2">{{Q.literals.form.destinyCurrency}}:</label>
           {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-2'})}}
         </p>
       </fieldset>
-      <p><button type="submit" class="pure-button pure-button-primary">Convert</button></p>
+      <p><button type="submit" class="pure-button pure-button-primary">{{Q.literals.form.convert}}</button></p>
     </form>
 </script>
 <script type="text/template" id="tmpl-result">
@@ -63,7 +63,7 @@
 </script>
 <script type="text/template" id="tmpl-currency-list">
   <select name="{{id}}" id="c-{{id}}" class="pure-u-1" required aria-required="true">
-    <option value="">Select currency</option>
+    <option value="">{{Q.literals.form.selectCurrency}}</option>
     [[ _.each(currencies, function (currency, index) { ]]
       <option value="{{currency.code}}">{{currency.name}}</option>
     [[ }); ]]
@@ -71,6 +71,9 @@
 </script>
 
 <script type="text/javascript">
+  var $Q = {
+   literals: null
+  };
   (function() {
     _.templateSettings = {
       interpolate: /\{\{(.+?)\}\}/g,
@@ -81,8 +84,22 @@
       tmpl: function (id, context) {
         var html = $.trim($(id).html()).replace(/(\r\n|\n|\r)/gm, '');
         return _.template(html, context);
+      },
+      literals: function () {
+        return {
+          "form": {
+            "quantity": "Quantity",
+            "currencies": "Currencies",
+            "originCurrency": "From",
+            "destinyCurrency": "To",
+            "selectCurrency": "Select currency",
+            "convert": "Convert"
+          }
+        };
       }
     });
+    
+    $Q.literals = _.literals();
 
     $.get('data/currencies.json', function (currencies) {
       $('#currency-selection').html(_.tmpl('#tmpl-currency-selector', {currencies: currencies}));
