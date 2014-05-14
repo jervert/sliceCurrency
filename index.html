@@ -38,7 +38,7 @@
     <form action="data.php" method="POST">
       <p class="pure-control-group">
         <label for="c-quantity">Quantity:</label>
-        <input type="text" name="quantity" id="c-quantity">
+        <input type="text" name="quantity" id="c-quantity" required aria-required="true">
       </p>
       
       <fieldset class="pure-group">
@@ -65,7 +65,8 @@
   </div>
 </script>
 <script type="text/template" id="tmpl-currency-list">
-  <select name="{{id}}" id="c-{{id}}" class="pure-u-1">
+  <select name="{{id}}" id="c-{{id}}" class="pure-u-1" required aria-required="true">
+    <option value="">Select currency</option>
     [[ _.each(currencies, function (currency, index) { ]]
       <option value="{{currency.code}}">{{currency.name}}</option>
     [[ }); ]]
