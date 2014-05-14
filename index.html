@@ -38,7 +38,7 @@
     <form action="data.php" method="POST">
       <p class="pure-control-group">
         <label for="c-quantity">Quantity:</label>
-        <input type="text" name="quantity" id="c-quantity" required aria-required="true">
+        <input type="number" name="quantity" id="c-quantity" required aria-required="true">
       </p>
       
       <fieldset class="pure-group">
@@ -52,9 +52,6 @@
           {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-2'})}}
         </p>
       </fieldset>
-
-      
-
       <p><button type="submit" class="pure-button pure-button-primary">Convert</button></p>
     </form>
 </script>
