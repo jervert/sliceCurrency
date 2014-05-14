@@ -44,15 +44,15 @@
       <fieldset class="pure-group">
         <legend>{{$Q.literals.form.currencies}}</legend>
         <p class="pure-control-group">
-          <label for="c-currency-1">{{Q.literals.form.originCurrency}}:</label>
+          <label for="c-currency-1">{{$Q.literals.form.originCurrency}}:</label>
           {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-1'})}}
         </p>
         <p class="pure-control-group">
-          <label for="c-currency-2">{{Q.literals.form.destinyCurrency}}:</label>
+          <label for="c-currency-2">{{$Q.literals.form.destinyCurrency}}:</label>
           {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-2'})}}
         </p>
       </fieldset>
-      <p><button type="submit" class="pure-button pure-button-primary">{{Q.literals.form.convert}}</button></p>
+      <p><button type="submit" class="pure-button pure-button-primary">{{$Q.literals.form.convert}}</button></p>
     </form>
 </script>
 <script type="text/template" id="tmpl-result">
@@ -63,7 +63,7 @@
 </script>
 <script type="text/template" id="tmpl-currency-list">
   <select name="{{id}}" id="c-{{id}}" class="pure-u-1" required aria-required="true">
-    <option value="">{{Q.literals.form.selectCurrency}}</option>
+    <option value="">{{$Q.literals.form.selectCurrency}}</option>
     [[ _.each(currencies, function (currency, index) { ]]
       <option value="{{currency.code}}">{{currency.name}}</option>
     [[ }); ]]
