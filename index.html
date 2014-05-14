@@ -11,54 +11,59 @@
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css" media="all">
+		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0-rc-1/pure-min.css" media="all">
 		<link rel="stylesheet" href="css/styles.css" media="all">
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.underscore.min.js"></script>
 </head>
 <body>
+<div id="page">
   <header>
     <h1>SliceCurrency</h1>
     <p>Another currency conversion tool</p>
   </header>
   <main>
-	  <form id="currency-selection" action="data.php" method="POST" class=" class="pure-form pure-form-stacked">
+	  <div id="currency-selection" class="pure-form pure-form-stacked">
       <div class="loading"><img alt="" src="img/ajax-loader.gif"></div>
-    </form>
+    </div>
     <div id="conversion-result"></div>
   </main>
-
+</div>
 
 <script type="text/template" id="tmpl-loading">
   <div class="loading"><img alt="" src="img/ajax-loader.gif"></div>
 </script>
 <script type="text/template" id="tmpl-currency-selector">
-  <fieldset>
-    <legend>Select values</legend>
-    <p class="pure-u-1">
-      <label for="c-quantity">Quantity:</label>
-      <input type="text" name="quantity" id="c-quantity">
-    </p>
-    <div class="pure-g">
-      <p class="pure-u-1 pure-u-med-1-2">
-        <label for="c-currency-1">From:</label>
-        {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-1'})}}
+    <form action="data.php" method="POST">
+      <p class="pure-control-group">
+        <label for="c-quantity">Quantity:</label>
+        <input type="text" name="quantity" id="c-quantity">
       </p>
-      <p class="pure-u-1 pure-u-med-1-2">
-        <label for="c-currency-2">To:</label>
-        {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-2'})}}
-      </p>
-    </div>
-    <p><button type="submit" class="pure-button pure-button-primary">Convert</button></p>
-  </fieldset>
+      
+      <fieldset class="pure-group">
+        <legend>Currencies</legend>
+        <p class="pure-control-group">
+          <label for="c-currency-1">From:</label>
+          {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-1'})}}
+        </p>
+        <p class="pure-control-group">
+          <label for="c-currency-2">To:</label>
+          {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-2'})}}
+        </p>
+      </fieldset>
+
+      
+
+      <p><button type="submit" class="pure-button pure-button-primary">Convert</button></p>
+    </form>
 </script>
 <script type="text/template" id="tmpl-result">
   <p>{{currencies.origin.value}} {{currencies.origin.code}} = {{currencies.destiny.value}} {{currencies.destiny.code}}</p>
   <p>1 {{currencies.origin.code}} = {{rate}} {{currencies.destiny.code}}</p>
 </script>
 <script type="text/template" id="tmpl-currency-list">
-  <select name="{{id}}" id="c-{{id}}">
+  <select name="{{id}}" id="c-{{id}}" class="pure-u-1">
     [[ _.each(currencies, function (currency, index) { ]]
       <option value="{{currency.code}}">{{currency.name}}</option>
     [[ }); ]]
@@ -78,8 +83,7 @@
         return _.template(html, context);
       }
     });
-  
-    // http://en.wikipedia.org/wiki/ISO_4217
+
     $.get('data/currencies.json', function (currencies) {
       $('#currency-selection').html(_.tmpl('#tmpl-currency-selector', {currencies: currencies}));
     
