@@ -1,1 +1,6 @@
 #page {margin:10px auto; max-width:300px; width:90%;}
+.loading {padding:10px;}
+.loading img {display:block; margin:0 auto;}
+.result {background:#dfdfdf; border:1px solid #dcdcdc; margin:10px; padding:10px;}
+.result .text-result {font-size:18px;}
+.result .text-rate {font-size:12px;}

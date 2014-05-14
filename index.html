@@ -59,8 +59,10 @@
     </form>
 </script>
 <script type="text/template" id="tmpl-result">
-  <p>{{currencies.origin.value}} {{currencies.origin.code}} = {{currencies.destiny.value}} {{currencies.destiny.code}}</p>
-  <p>1 {{currencies.origin.code}} = {{rate}} {{currencies.destiny.code}}</p>
+  <div class="result">
+    <p class="text-result">{{currencies.origin.value}} {{currencies.origin.code}} = {{currencies.destiny.value}} {{currencies.destiny.code}}</p>
+    <p class="text-rate">1 {{currencies.origin.code}} = {{rate}} {{currencies.destiny.code}}</p>
+  </div>
 </script>
 <script type="text/template" id="tmpl-currency-list">
   <select name="{{id}}" id="c-{{id}}" class="pure-u-1">
