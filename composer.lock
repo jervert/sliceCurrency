@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "6980b25c3eb102daa2e7966db3fb8f84",
+    "hash": "66f0ce11e9a4e559ba898b03fe5f3e3a",
     "packages": [
         {
             "name": "florianv/swap",
