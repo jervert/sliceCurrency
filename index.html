@@ -85,30 +85,34 @@
         var html = $.trim($(id).html()).replace(/(\r\n|\n|\r)/gm, '');
         return _.template(html, context);
       },
-      literals: function () {
-        return {
-          "form": {
-            "quantity": "Quantity",
-            "currencies": "Currencies",
-            "originCurrency": "From",
-            "destinyCurrency": "To",
-            "selectCurrency": "Select currency",
-            "convert": "Convert"
+      literals: function (data) {
+        var cultures = {
+          "en": {
+            "form": {
+              "quantity": "Quantity",
+              "currencies": "Currencies",
+              "originCurrency": "From",
+              "destinyCurrency": "To",
+              "selectCurrency": "Select currency",
+              "convert": "Convert"
+            }
           }
         };
+        return cultures[data.culture]
       }
     });
     
-    $Q.literals = _.literals();
+    $Q.literals = _.literals({culture: 'en'});
 
     $.get('data/currencies.json', function (currencies) {
       $('#currency-selection').html(_.tmpl('#tmpl-currency-selector', {currencies: currencies}));
     
       $('form').on('submit', function (ev) {
         ev.preventDefault();
-        $('#conversion-result').html(_.tmpl('#tmpl-loading', {}));
+        var $conversionResult = $('#conversion-result');
+        $conversionResult.html(_.tmpl('#tmpl-loading', {}));
         $.post($('form').attr('action'), $('form').serialize(), function (data) {
-          $('#conversion-result').html(_.tmpl('#tmpl-result', data));
+          $conversionResult.html(_.tmpl('#tmpl-result', data));
         });
       });
     });
