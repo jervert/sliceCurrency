@@ -104,8 +104,8 @@
     
     $Q.literals = _.literals({culture: 'en'});
 
-    $.get('data/currencies.json', function (currencies) {
-      $('#currency-selection').html(_.tmpl('#tmpl-currency-selector', {currencies: currencies}));
+    $.get('data/conversion.json', function (data) {
+      $('#currency-selection').html(_.tmpl('#tmpl-currency-selector', {currencies: data.currencies}));
     
       $('form').on('submit', function (ev) {
         ev.preventDefault();
