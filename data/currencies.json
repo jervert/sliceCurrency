@@ -1,7 +1,0 @@
-[
-  {"code": "EUR", "name": "Euro"},
-  {"code": "GBP", "name": "Pound sterling"},
-  {"code": "USD", "name": "Us Dollar"},
-  {"code": "CNY", "name": "Chinese yuan"},
-  {"code": "JPY", "name": "Japanese yen"}
-]

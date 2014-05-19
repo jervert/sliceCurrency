@@ -1,0 +1,14 @@
+{
+  "source": "http://en.wikipedia.org/wiki/ISO_4217",
+  "currencies": [
+    {"code": "EUR", "name": "Euro"},
+    {"code": "GBP", "name": "Pound sterling"},
+    {"code": "CHF", "name": "Swiss franc"},
+    {"code": "USD", "name": "Us Dollar"},
+    {"code": "CAD", "name": "Canadian dollar"},
+    {"code": "AUD", "name": "Australian dollar"},
+    {"code": "RUB", "name": "Russian ruble"},
+    {"code": "CNY", "name": "Chinese yuan"},
+    {"code": "JPY", "name": "Japanese yen"}
+  ]
+}
