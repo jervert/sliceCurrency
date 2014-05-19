@@ -9,12 +9,16 @@ $quantity = floatval($_POST['quantity']);
 $client = new \Guzzle\Http\Client();
 
 //Then you can create a provider:
-$yahoo = new \Swap\Provider\YahooFinance($client);
 $google = new \Swap\Provider\GoogleFinance($client);
+$yahoo = new \Swap\Provider\YahooFinance($client);
+$provider = array(
+  'google' => $google,
+  'yahoo' => $yahoo
+);
 
 //Create a Swap instance and add the provider:
 $swap = new Swap\Swap();
-$swap->addProvider($yahoo);
+$swap->addProvider($provider[$_POST['provider']]);
 
 // Create the currency pair EUR/USD
 $pair = new \Swap\Model\CurrencyPair($currency1, $currency2);

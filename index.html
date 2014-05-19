@@ -52,6 +52,16 @@
           {{_.tmpl('#tmpl-currency-list', {currencies: currencies, id: 'currency-2'})}}
         </p>
       </fieldset>
+      
+      <p class="pure-control-group">
+        <label for="c-quantity">{{$Q.literals.form.providers}}:</label>
+        <select name="provider" id="c-provider" required aria-required="true">
+          [[ _.each(providers, function (provider, index) { ]]
+            <option value="{{provider.id}}">{{provider.name}}</option>
+          [[ }); ]]
+        </select>
+      </p>
+      
       <p><button type="submit" class="pure-button pure-button-primary">{{$Q.literals.form.convert}}</button></p>
     </form>
 </script>
@@ -93,6 +103,7 @@
               "currencies": "Currencies",
               "originCurrency": "From",
               "destinyCurrency": "To",
+              "providers": "Providers",
               "selectCurrency": "Select currency",
               "convert": "Convert"
             }
@@ -105,7 +116,7 @@
     $Q.literals = _.literals({culture: 'en'});
 
     $.get('data/conversion.json', function (data) {
-      $('#currency-selection').html(_.tmpl('#tmpl-currency-selector', {currencies: data.currencies}));
+      $('#currency-selection').html(_.tmpl('#tmpl-currency-selector', {currencies: data.currencies, providers: data.providers}));
     
       $('form').on('submit', function (ev) {
         ev.preventDefault();
