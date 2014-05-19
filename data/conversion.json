@@ -1,15 +1,26 @@
 {
   "source": "http://en.wikipedia.org/wiki/ISO_4217",
   "currencies": [
+    {"code": "ARS", "name": "Argentine peso"},
     {"code": "AUD", "name": "Australian dollar"},
     {"code": "CAD", "name": "Canadian dollar"},
     {"code": "CHF", "name": "Swiss franc"},
     {"code": "CNY", "name": "Chinese yuan"},
-    {"code": "GBP", "name": "Pound sterling"},
+    {"code": "CZK", "name": "Czech koruna"},
+    {"code": "DKK", "name": "Danish krone"},
     {"code": "EUR", "name": "Euro"},
-    {"code": "JPY", "name": "Japanese yen"}
+    {"code": "GBP", "name": "Pound sterling"},
+    {"code": "HKD", "name": "Hong Kong dollar"},
+    {"code": "HUF", "name": "Hungarian forint"},
+    {"code": "INR", "name": "Indian rupee"},
+    {"code": "JPY", "name": "Japanese yen"},
+    {"code": "KRW", "name": "South Korean won"},
+    {"code": "MXN", "name": "Mexican peso"},
+    {"code": "NOK", "name": "Norwegian krone"},
     {"code": "RUB", "name": "Russian ruble"},
-    {"code": "USD", "name": "Us Dollar"},
+    {"code": "SEK", "name": "Swedish krona"},
+    {"code": "TWD", "name": "New Taiwan dollar"},
+    {"code": "USD", "name": "Us Dollar"}
   ],
   "providers": [
     {"id": "yahoo", "name": "Yahoo! finance"},
